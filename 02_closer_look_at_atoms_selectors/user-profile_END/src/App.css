@@ -13,13 +13,7 @@
   border-radius: 9px;
   box-shadow: 0 27px 20px 5px rgba(0, 0, 0, 0.03);
 }
-.Card--mini {
-  min-height: initial;
-  width: initial;
-  border-radius: 50%;
-  box-shadow: 0 27px 20px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
+
 .Card--loading {
   overflow: hidden;
   position: relative;
@@ -47,20 +41,11 @@
   border-top-left-radius: 9px;
   background: #ffd2fe;
 }
-.User__img--mini {
-  width: 100px;
-  height: 100px;
-  margin: 0 10px;
-  border-radius: 50%;
-}
+
 .User__img > img {
   max-width: 100%;
   position: absolute;
   bottom: 0;
-}
-.User__img--mini > img {
-  max-width: 100%;
-  border-radius: 50%;
 }
 
 .User__info {
@@ -82,6 +67,24 @@
 
 .faint {
   color: rgba(0, 0, 0, 0.47);
+}
+
+.UserPhoto {
+  min-height: initial;
+  width: initial;
+  border-radius: 50%;
+  box-shadow: 0 27px 20px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border: 0;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  background: #ffd2fe;
+}
+
+.UserPhoto > img {
+  max-width: 100%;
+  border-radius: 50%;
 }
 
 @keyframes loading {
