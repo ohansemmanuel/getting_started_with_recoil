@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { atom, useRecoilState } from "recoil";
 import { splitListInHalf } from "./splitListInHalf";
 import User, { UserPhoto } from "./User";
@@ -17,6 +17,7 @@ const userProfileState = atom({
 
 function App() {
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+  const [currentUserId, setCurrentUserId] = useState("");
   const {
     name,
     profilePic,
@@ -36,13 +37,28 @@ function App() {
         isLoading: false,
       })
     );
-  }, [setUserProfile]);
+  }, [setUserProfile]); //setUserProfile doesn't change
+
+  useEffect(() => {
+    if (!currentUserId) return;
+    fetchData(currentUserId).then((data) =>
+      setUserProfile({
+        ...data,
+        isLoading: false,
+      })
+    );
+  }, [currentUserId, setUserProfile]); //setUserProfile doesn't change
+
+  const handlePhotoClick = (evt) => {
+    const id = evt.currentTarget.dataset.id;
+    setUserProfile((prevState) => ({ ...prevState, isLoading: true }));
+    setCurrentUserId(id);
+  };
 
   const renderFriends = (friends) => {
     if (isLoading) return null;
-
     return friends.map((id) => (
-      <UserPhoto id={id} key={id} onClick={() => {}} />
+      <UserPhoto id={id} key={id} onClick={handlePhotoClick} />
     ));
   };
 
