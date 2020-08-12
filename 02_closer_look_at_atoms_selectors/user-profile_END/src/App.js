@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { atom, useRecoilState } from "recoil";
+import React from "react";
+import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 import { splitListInHalf } from "./splitListInHalf";
 import User, { UserPhoto } from "./User";
 import "./App.css";
@@ -10,14 +10,23 @@ const fetchData = async (id = "") =>
   await fetch(`${URL}${id}`).then((res) => res.json());
 
 // state values
-const userProfileState = atom({
+const currentUserIdState = atom({
+  key: "currentUserId",
+  default: "",
+});
+
+const userProfileState = selector({
   key: "userProfile",
-  default: {},
+  get: async ({ get }) => {
+    const id = get(currentUserIdState);
+    return await fetchData(id);
+  },
 });
 
 function App() {
-  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [currentUserId, setCurrentUserId] = useState("");
+  const userProfile = useRecoilValue(userProfileState);
+  const setCurrentUserId = useSetRecoilState(currentUserIdState);
+
   const {
     name,
     profilePic,
@@ -30,28 +39,8 @@ function App() {
 
   const [firstHalf, secondHalf] = splitListInHalf(friends);
 
-  useEffect(() => {
-    fetchData().then((data) =>
-      setUserProfile({
-        ...data,
-        isLoading: false,
-      })
-    );
-  }, [setUserProfile]); //setUserProfile doesn't change
-
-  useEffect(() => {
-    if (!currentUserId) return;
-    fetchData(currentUserId).then((data) =>
-      setUserProfile({
-        ...data,
-        isLoading: false,
-      })
-    );
-  }, [currentUserId, setUserProfile]); //setUserProfile doesn't change
-
   const handlePhotoClick = (evt) => {
     const id = evt.currentTarget.dataset.id;
-    setUserProfile((prevState) => ({ ...prevState, isLoading: true }));
     setCurrentUserId(id);
   };
 
