@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  atom,
-  selector,
-  useRecoilState,
-  useSetRecoilState,
-  useRecoilValueLoadable,
-  selectorFamily,
-} from "recoil";
+import { useRecoilValueLoadable, selectorFamily } from "recoil";
 import { splitListInHalf } from "./splitListInHalf";
 import User, { UserPhoto } from "./User";
 import "./App.css";
@@ -20,12 +13,6 @@ const fetchData = async (id = "") =>
     }
     return res.json();
   });
-
-// state values
-const currentUserIdState = atom({
-  key: "currentUserId",
-  default: "",
-});
 
 const userProfileState = selectorFamily({
   key: "userProfile",
