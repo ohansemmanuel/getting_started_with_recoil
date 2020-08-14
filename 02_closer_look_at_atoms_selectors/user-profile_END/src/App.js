@@ -1,5 +1,10 @@
 import React from "react";
-import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValueLoadable,
+} from "recoil";
 import { splitListInHalf } from "./splitListInHalf";
 import User, { UserPhoto } from "./User";
 import "./App.css";
@@ -24,18 +29,13 @@ const userProfileState = selector({
 });
 
 function App() {
-  const userProfile = useRecoilValue(userProfileState);
-  const setCurrentUserId = useSetRecoilState(currentUserIdState);
+  const setCurrentUserId = useRecoilState(currentUserIdState);
+  const { state, contents: userProfile } = useRecoilValueLoadable(
+    userProfileState
+  );
+  const isLoading = state === "loading";
 
-  const {
-    name,
-    profilePic,
-    bio,
-    likes,
-    location,
-    friends = [],
-    isLoading = true,
-  } = userProfile;
+  const { name, profilePic, bio, likes, location, friends = [] } = userProfile;
 
   const [firstHalf, secondHalf] = splitListInHalf(friends);
 
