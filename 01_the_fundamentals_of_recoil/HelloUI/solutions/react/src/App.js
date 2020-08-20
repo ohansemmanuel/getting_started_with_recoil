@@ -1,5 +1,5 @@
 import React from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import logo from "./logo.png";
 import "./App.css";
 
@@ -10,8 +10,18 @@ const activePlanetAtom = atom({
   default: PLANETS[0],
 });
 
+const activePlanetLengthSelector = selector({
+  key: "activePlanetLength",
+  get: ({ get }) => {
+    const activePlanet = get(activePlanetAtom);
+    return activePlanet.length;
+  },
+});
+
 function App() {
   const [activePlanet, setActivePlanet] = useRecoilState(activePlanetAtom);
+  const activePlanetLength = useRecoilValue(activePlanetLengthSelector);
+
   const handlePlanetUpdate = (event) => {
     setActivePlanet(event.target.textContent);
   };
@@ -33,6 +43,7 @@ function App() {
             {planet}
           </button>
         ))}
+        <p>The current planet has {activePlanetLength} characters</p>
       </section>
     </>
   );
