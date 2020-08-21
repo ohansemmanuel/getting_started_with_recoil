@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { fetchUserProfile } from "./api";
-import logo from "./logo.svg";
 import "./App.css";
 
 const userProfileState = atom({
