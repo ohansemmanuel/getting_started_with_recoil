@@ -34,12 +34,12 @@ const User = ({ profilePic, bio, likes, name, location, isLoading }) => {
   );
 };
 
-export const UserPhoto = ({ profilePic, onClick, userId }) => {
-  const id = userId.slice(0, userId.indexOf(".")); //remove .jpeg/.png etc.
+export const UserPhoto = ({ onClick, id }) => {
+  const userId = id.slice(0, id.indexOf(".")); //remove .jpeg/.png etc.
 
   return (
-    <button className="UserPhoto" onClick={onClick} data-id={id}>
-      <img src={profilePic} alt="user" />
+    <button className="UserPhoto" onClick={onClick} data-id={userId}>
+      <img src={`https://i.imgur.com/${id}`} alt="user" />
     </button>
   );
 };
