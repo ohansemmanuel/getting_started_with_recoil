@@ -1,23 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { atom, useRecoilState } from "recoil";
+import { fetchUserProfile } from "./api";
+import logo from "./logo.svg";
+import "./App.css";
+
+const userProfileState = atom({
+  key: "userProfile",
+  default: {},
+});
 
 function App() {
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+
+  useEffect(() => {
+    fetchUserProfile().then((data) => setUserProfile(data));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <pre>{JSON.stringify(userProfile, null, 2)}</pre>
       </header>
     </div>
   );
