@@ -1913,27 +1913,6 @@
       "groupIds": []
     },
     {
-      "type": "ellipse",
-      "version": 350,
-      "versionNonce": 1755635088,
-      "isDeleted": false,
-      "id": "asRmnp_8ta_bumyA7wpUw",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 2,
-      "opacity": 100,
-      "angle": 0,
-      "x": 10082.24482528292,
-      "y": -857.0037276065866,
-      "strokeColor": "#000000",
-      "backgroundColor": "#fd7e14",
-      "width": 126.39804596558304,
-      "height": 106.78455225217424,
-      "seed": 1193970272,
-      "groupIds": []
-    },
-    {
       "type": "arrow",
       "version": 346,
       "versionNonce": 1399281568,
@@ -2764,68 +2743,6 @@
       "height": 106.78455225217424,
       "seed": 1770588768,
       "groupIds": []
-    },
-    {
-      "type": "arrow",
-      "version": 83,
-      "versionNonce": 474276768,
-      "isDeleted": false,
-      "id": "qPaEO83eq0ONSJZsPBluO",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 2,
-      "opacity": 100,
-      "angle": 0,
-      "x": 9961.200070107778,
-      "y": -744.8001145076755,
-      "strokeColor": "#000000",
-      "backgroundColor": "#15aabf",
-      "width": 126.00006103515625,
-      "height": 105.99998474121094,
-      "seed": 2010247776,
-      "groupIds": [],
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          126.00006103515625,
-          105.99998474121094
-        ]
-      ]
-    },
-    {
-      "type": "arrow",
-      "version": 80,
-      "versionNonce": 1965518752,
-      "isDeleted": false,
-      "id": "rY97JX4WEWHcAovH59lu-",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 2,
-      "opacity": 100,
-      "angle": 0,
-      "x": 10151.200070107778,
-      "y": -740.8001246802014,
-      "strokeColor": "#000000",
-      "backgroundColor": "#15aabf",
-      "width": 1.9999186197919698,
-      "height": 61.99999491373694,
-      "seed": 1638180448,
-      "groupIds": [],
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -1.9999186197919698,
-          61.99999491373694
-        ]
-      ]
     },
     {
       "type": "arrow",
@@ -4636,63 +4553,6 @@
       ]
     },
     {
-      "id": "-S4il6-3tvEBhVv80VwvZ",
-      "type": "text",
-      "x": 10346.533333333335,
-      "y": -850.5,
-      "width": 634,
-      "height": 74,
-      "angle": 0,
-      "strokeColor": "#000000",
-      "backgroundColor": "transparent",
-      "fillStyle": "hachure",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "seed": 823126416,
-      "version": 144,
-      "versionNonce": 1431271699,
-      "isDeleted": false,
-      "text": "atom - currentuserID",
-      "fontSize": 58.41807909604524,
-      "fontFamily": 1,
-      "textAlign": "left",
-      "baseline": 52
-    },
-    {
-      "type": "arrow",
-      "version": 8,
-      "versionNonce": 1280141200,
-      "isDeleted": false,
-      "id": "7odrU0wnskWpxQ_I7zx_J",
-      "fillStyle": "hachure",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 10229,
-      "y": -814.6666666666667,
-      "strokeColor": "#000000",
-      "backgroundColor": "transparent",
-      "width": 85,
-      "height": 3.3333333333332575,
-      "seed": 892785008,
-      "groupIds": [],
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          85,
-          -3.3333333333332575
-        ]
-      ]
-    },
-    {
       "type": "arrow",
       "version": 28,
       "versionNonce": 909642096,
@@ -4748,6 +4608,38 @@
       "fontFamily": 1,
       "textAlign": "left",
       "baseline": 60
+    },
+    {
+      "id": "u5o1E3NWd3ifz_3kqAWBP",
+      "type": "line",
+      "x": 10234,
+      "y": 69.25,
+      "width": 50,
+      "height": 645,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "seed": 1411464093,
+      "version": 55,
+      "versionNonce": 771866045,
+      "isDeleted": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -50,
+          -645
+        ]
+      ],
+      "lastCommittedPoint": null
     }
   ],
   "appState": {
