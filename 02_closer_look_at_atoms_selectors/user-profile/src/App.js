@@ -31,6 +31,11 @@ function App() {
   const setCurrentUserId = useSetRecoilState(currentUserIdState);
 
   const isLoading = state === "loading";
+  const hasError = state === "hasError";
+
+  if (hasError) {
+    return <div>Has Error :(</div>;
+  }
 
   const { name, profilePic, likes, bio, location, friends } = userProfile;
 
