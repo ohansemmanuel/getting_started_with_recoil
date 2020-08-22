@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, selector, useRecoilState } from "recoil";
 import { fetchUserProfile } from "./api";
 import User, { UserPhoto } from "./User";
 import { splitListInHalf } from "./splitListInHalf";
 
 import "./App.css";
 
-const userProfileState = atom({
+const currentUserIdState = atom({
+  key: "currentUserId",
+  default: "",
+});
+
+const userProfileState = selector({
   key: "userProfile",
-  default: {},
+  get: async ({ get }) => {
+    const currentUserId = get(currentUserIdState);
+    const data = await fetchUserProfile(currentUserId);
+    return {
+      ...data,
+      isLoading: false,
+    };
+  },
 });
 
 function App() {
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [currentUserId, setCurrentUserId] = useState("");
+  const [currentUserId, setCurrentUserId] = useRecoilState(currentUserIdState);
 
   const {
     name,
@@ -25,20 +37,10 @@ function App() {
     isLoading = true,
   } = userProfile;
 
-  useEffect(() => {
-    fetchUserProfile(currentUserId).then((data) =>
-      setUserProfile({
-        ...data,
-        isLoading: false,
-      })
-    );
-  }, [currentUserId, setUserProfile]);
-
   const [firstFriendsHalf, secondFriendsHalf] = splitListInHalf(friends);
 
   const handleFriendsClick = (evt) => {
     const id = evt.currentTarget.dataset.id;
-    setUserProfile((prevState) => ({ ...prevState, isLoading: true }));
     setCurrentUserId(id);
   };
 
