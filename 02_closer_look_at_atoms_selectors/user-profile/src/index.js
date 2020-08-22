@@ -8,9 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <React.Suspense fallback={<div>loading...</div>}>
-        <App />
-      </React.Suspense>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { atom, selector, useRecoilState } from "recoil";
+import React from "react";
+import {
+  atom,
+  selector,
+  useSetRecoilState,
+  useRecoilValueLoadable,
+} from "recoil";
 import { fetchUserProfile } from "./api";
 import User, { UserPhoto } from "./User";
 import { splitListInHalf } from "./splitListInHalf";
@@ -15,27 +20,19 @@ const userProfileState = selector({
   key: "userProfile",
   get: async ({ get }) => {
     const currentUserId = get(currentUserIdState);
-    const data = await fetchUserProfile(currentUserId);
-    return {
-      ...data,
-      isLoading: false,
-    };
+    return await fetchUserProfile(currentUserId);
   },
 });
 
 function App() {
-  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [currentUserId, setCurrentUserId] = useRecoilState(currentUserIdState);
+  const { state, contents: userProfile } = useRecoilValueLoadable(
+    userProfileState
+  );
+  const setCurrentUserId = useSetRecoilState(currentUserIdState);
 
-  const {
-    name,
-    profilePic,
-    likes,
-    bio,
-    location,
-    friends,
-    isLoading = true,
-  } = userProfile;
+  const isLoading = state === "loading";
+
+  const { name, profilePic, likes, bio, location, friends } = userProfile;
 
   const [firstFriendsHalf, secondFriendsHalf] = splitListInHalf(friends);
 
