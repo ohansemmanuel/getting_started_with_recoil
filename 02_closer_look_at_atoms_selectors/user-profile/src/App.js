@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { fetchUserProfile } from "./api";
-import User from "./User";
+import User, { UserPhoto } from "./User";
+import { splitListInHalf } from "./splitListInHalf";
 
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App() {
     likes,
     bio,
     location,
+    friends,
     isLoading = true,
   } = userProfile;
 
@@ -30,18 +32,28 @@ function App() {
     );
   }, [setUserProfile]);
 
+  const [firstFriendsHalf, secondFriendsHalf] = splitListInHalf(friends);
+
+  const handleFriendsClick = () => {};
+
+  const renderFriends = (friendList) => {
+    return friendList.map((friendId) => (
+      <UserPhoto key={friendId} id={friendId} onClick={handleFriendsClick} />
+    ));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <User
-          name={name}
-          profilePic={profilePic}
-          likes={likes}
-          bio={bio}
-          location={location}
-          isLoading={isLoading}
-        />
-      </header>
+      {renderFriends(firstFriendsHalf)}
+      <User
+        name={name}
+        profilePic={profilePic}
+        likes={likes}
+        bio={bio}
+        location={location}
+        isLoading={isLoading}
+      />
+      {renderFriends(secondFriendsHalf)}
     </div>
   );
 }
