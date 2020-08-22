@@ -1,34 +1,23 @@
-import React from "react";
-import {
-  atom,
-  selector,
-  useSetRecoilState,
-  useRecoilValueLoadable,
-} from "recoil";
+import React, { useState } from "react";
+import { selectorFamily, useRecoilValueLoadable } from "recoil";
 import { fetchUserProfile } from "./api";
 import User, { UserPhoto } from "./User";
 import { splitListInHalf } from "./splitListInHalf";
 
 import "./App.css";
 
-const currentUserIdState = atom({
-  key: "currentUserId",
-  default: "",
-});
-
-const userProfileState = selector({
+const userProfileState = selectorFamily({
   key: "userProfile",
-  get: async ({ get }) => {
-    const currentUserId = get(currentUserIdState);
+  get: (currentUserId) => async ({ get }) => {
     return await fetchUserProfile(currentUserId);
   },
 });
 
 function App() {
+  const [currentUserId, setCurrentUserId] = useState("");
   const { state, contents: userProfile } = useRecoilValueLoadable(
-    userProfileState
+    userProfileState(currentUserId)
   );
-  const setCurrentUserId = useSetRecoilState(currentUserIdState);
 
   const isLoading = state === "loading";
   const hasError = state === "hasError";
