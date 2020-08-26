@@ -1,10 +1,21 @@
-import React, { useState } from "react";
-import { selectorFamily, useRecoilValueLoadable } from "recoil";
+import React from "react";
+import {
+  selectorFamily,
+  useRecoilValueLoadable,
+  useRecoilCallback,
+  atom,
+  useRecoilValue,
+} from "recoil";
 import { fetchUserProfile } from "./api";
 import User, { UserPhoto } from "./User";
 import { splitListInHalf } from "./splitListInHalf";
 
 import "./App.css";
+
+const currentUserIdState = atom({
+  key: "currentUserId",
+  default: "",
+});
 
 const userProfileState = selectorFamily({
   key: "userProfile",
@@ -14,26 +25,36 @@ const userProfileState = selectorFamily({
 });
 
 function App() {
-  const [currentUserId, setCurrentUserId] = useState("");
-  const { state, contents: userProfile } = useRecoilValueLoadable(
+  const currentUserId = useRecoilValue(currentUserIdState);
+  const userProfileStateLoadable = useRecoilValueLoadable(
     userProfileState(currentUserId)
   );
 
-  const isLoading = state === "loading";
-  const hasError = state === "hasError";
+  const isLoading = userProfileStateLoadable.state === "loading";
+  const hasError = userProfileStateLoadable.state === "hasError";
+
+  const handleFriendsClick = useRecoilCallback(
+    ({ snapshot, set }) => async (evt) => {
+      const id = evt.currentTarget.dataset.id;
+      snapshot.getLoadable(userProfileState(id));
+      set(currentUserIdState, id);
+    }
+  );
 
   if (hasError) {
     return <div>Has Error :(</div>;
   }
 
-  const { name, profilePic, likes, bio, location, friends } = userProfile;
+  const {
+    name,
+    profilePic,
+    likes,
+    bio,
+    location,
+    friends,
+  } = userProfileStateLoadable.contents;
 
   const [firstFriendsHalf, secondFriendsHalf] = splitListInHalf(friends);
-
-  const handleFriendsClick = (evt) => {
-    const id = evt.currentTarget.dataset.id;
-    setCurrentUserId(id);
-  };
 
   const renderFriends = (friendList) => {
     return friendList.map((friendId) => (
